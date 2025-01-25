@@ -125,28 +125,28 @@ int main(int argc, char** argv)
 		xs_config.p.Fs = 0;
 		xs_config.p.Rm = 0; // 0 (RSF) or 1 (CSF); (==RUN_SIGFLAGS_ZRCSF)?
 		xs_config.p.Sd = 0;
-		memset(xs_config.p.lvl_gain, 255, (MAX_NBANDS + 1) * sizeof(uint8_t));
+		memset(xs_config.p.lvl_gain[0], 255, (MAX_NBANDS + 1) * sizeof(uint8_t));
 		if (xs_config.p.NLx == 1)
-			xs_parse_u8array_(xs_config.p.lvl_gain, MAX_NBANDS, "1,1", 0); //  "1,0,0,1,0,0" "1,1,0,0,0,0"; "2,2,2,1,1,1"
+			xs_parse_u8array_(xs_config.p.lvl_gain[0], MAX_NBANDS, "1,1", 0); //  "1,0,0,1,0,0" "1,1,0,0,0,0"; "2,2,2,1,1,1"
 		else if (xs_config.p.NLx == 2)
-			xs_parse_u8array_(xs_config.p.lvl_gain, MAX_NBANDS, "1,1,1", 0); //  "1,0,0,1,0,0" "1,1,0,0,0,0"; "2,2,2,1,1,1"
+			xs_parse_u8array_(xs_config.p.lvl_gain[0], MAX_NBANDS, "1,1,1", 0); //  "1,0,0,1,0,0" "1,1,0,0,0,0"; "2,2,2,1,1,1"
 		else if (xs_config.p.NLx == 3)
-			xs_parse_u8array_(xs_config.p.lvl_gain, MAX_NBANDS, "1,1,1,1", 0); //  "1,0,0,1,0,0" "1,1,0,0,0,0"; "2,2,2,1,1,1"
+			xs_parse_u8array_(xs_config.p.lvl_gain[0], MAX_NBANDS, "1,1,1,1", 0); //  "1,0,0,1,0,0" "1,1,0,0,0,0"; "2,2,2,1,1,1"
 		else if (xs_config.p.NLx == 4)
-			xs_parse_u8array_(xs_config.p.lvl_gain, MAX_NBANDS, "1,1,1,1,1", 0); //  "1,0,0,1,0,0" "1,1,0,0,0,0"; "2,2,2,1,1,1"
+			xs_parse_u8array_(xs_config.p.lvl_gain[0], MAX_NBANDS, "1,1,1,1,1", 0); //  "1,0,0,1,0,0" "1,1,0,0,0,0"; "2,2,2,1,1,1"
 		else if (xs_config.p.NLx == 5)
-			xs_parse_u8array_(xs_config.p.lvl_gain, MAX_NBANDS, "0,0,0,0,0,0", 0); //  "1,0,0,1,0,0" "1,1,0,0,0,0"; "2,2,2,1,1,1"
-		memset(xs_config.p.lvl_prio, 255, (MAX_NBANDS + 1) * sizeof(uint8_t));
+			xs_parse_u8array_(xs_config.p.lvl_gain[0], MAX_NBANDS, "0,0,0,0,0,0", 0); //  "1,0,0,1,0,0" "1,1,0,0,0,0"; "2,2,2,1,1,1"
+		memset(xs_config.p.lvl_prio[0], 255, (MAX_NBANDS + 1) * sizeof(uint8_t));
 		if (xs_config.p.NLx == 1)
-			xs_parse_u8array_(xs_config.p.lvl_prio, MAX_NBANDS, "0,1", 0); // "0,2,3,1,4,5" "0,1,2,4,3,5"; "8,7,6,5,3,4"
+			xs_parse_u8array_(xs_config.p.lvl_prio[0], MAX_NBANDS, "0,1", 0); // "0,2,3,1,4,5" "0,1,2,4,3,5"; "8,7,6,5,3,4"
 		else if (xs_config.p.NLx == 2)
-			xs_parse_u8array_(xs_config.p.lvl_prio, MAX_NBANDS, "0,1,2", 0); // "0,2,3,1,4,5" "0,1,2,4,3,5"; "8,7,6,5,3,4"
+			xs_parse_u8array_(xs_config.p.lvl_prio[0], MAX_NBANDS, "0,1,2", 0); // "0,2,3,1,4,5" "0,1,2,4,3,5"; "8,7,6,5,3,4"
 		else if (xs_config.p.NLx == 3)
-			xs_parse_u8array_(xs_config.p.lvl_prio, MAX_NBANDS, "0,1,2,3", 0); // "0,2,3,1,4,5" "0,1,2,4,3,5"; "8,7,6,5,3,4"
+			xs_parse_u8array_(xs_config.p.lvl_prio[0], MAX_NBANDS, "0,1,2,3", 0); // "0,2,3,1,4,5" "0,1,2,4,3,5"; "8,7,6,5,3,4"
 		else if (xs_config.p.NLx == 4)
-			xs_parse_u8array_(xs_config.p.lvl_prio, MAX_NBANDS, "0,1,2,3,4", 0); // "0,2,3,1,4,5" "0,1,2,4,3,5"; "8,7,6,5,3,4"
+			xs_parse_u8array_(xs_config.p.lvl_prio[0], MAX_NBANDS, "0,1,2,3,4", 0); // "0,2,3,1,4,5" "0,1,2,4,3,5"; "8,7,6,5,3,4"
 		else if (xs_config.p.NLx == 5)
-			xs_parse_u8array_(xs_config.p.lvl_prio, MAX_NBANDS, "0,0,0,0,0,0", 0); // "0,2,3,1,4,5" "0,1,2,4,3,5"; "8,7,6,5,3,4"
+			xs_parse_u8array_(xs_config.p.lvl_prio[0], MAX_NBANDS, "0,0,0,0,0,0", 0); // "0,2,3,1,4,5" "0,1,2,4,3,5"; "8,7,6,5,3,4"
 		xs_config.p.Tnlt = XS_NLT_NONE;
 		xs_config.p.Tnlt_params.quadratic.sigma = 0; xs_config.p.Tnlt_params.quadratic.alpha = 0;
 		xs_config.p.Tnlt_params.extended.T1 = 0; xs_config.p.Tnlt_params.extended.T2 = 0; xs_config.p.Tnlt_params.extended.E = 0;
