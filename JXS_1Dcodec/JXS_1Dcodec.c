@@ -106,6 +106,7 @@ int main(int argc, char** argv)
 		xs_config.cap_bits = XS_CAP_MLS;
 		xs_config.fbblevel = XS_FBBLEVEL_UNRESTRICTED;  // added in v3
 		xs_config.use_tdc_mode = 0;                     // added in v3
+		xs_config.use_long_precinct_headers = 0;        // added in v3 (questionable, value provided only to reach consistence with ed2 mono_mls script)
 		xs_config.p.tpc.enabled = 0;					// added in v3
 		xs_config.p.color_transform = XS_CPIH_NONE;
 		xs_config.p.Cw = 0;
