@@ -1,11 +1,11 @@
-﻿// LZCC.c : Defines the entry point for the application.
+﻿// ChangeEndiannes.c : Defines the entry point for the application.
 //
-/*LZSS Compression Component*/
-/*Jonathan P Dawson 2014-07.10*/
+/*Change endiannes in Chips' C language flavour*/
+
 
 const int N = 128;
 
-unsigned big_endian = input("big_endian");
+unsigned big_endian = input("big_endian");          // point to stream; similar to Handel C's lang flavour
 unsigned little_endian = output("little_endian");
 
 void main() {
