@@ -1,6 +1,6 @@
-﻿// ChangeEndiannes.c : Defines the entry point for the application.
+﻿// ChangeEndianness.c : Defines the entry point for the application.
 //
-/*Change endiannes in Chips' C language flavour*/
+/*Change endianness in Chips' C language flavour*/
 
 
 const int N = 128;
