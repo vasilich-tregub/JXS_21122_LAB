@@ -1,43 +1,15 @@
-This archive contains a set of Python scripts that can be used to parse
-JPEG, JPEG 2000, JPEG XR, JPEG XS and JPEG XT files and output
-their contents. They require a python 2.7 environment (python 3.x
-will *NOT* work on them).
+This folder contains Python scripts of ISO-21122-Part4-ed3 updated for use with Python3. 
 
-* jp2codestream.py
-  Codestream parsing for JPEG 2000 parsing. Call this script with a 
-  raw codestream as argument to parse it. The overhead output at the 
-  end denotes the number of paket header bytes, i.e. the size of 
-  data that is not directly used for image data.
+LICENSE: This is a derived work. All rights for the original Python scripts reside with Thomas Richter <thomas.richter@iis.fraunhofer.de>.
+See README-Original.
 
-* jp2file.py
-  File Format parsing, supports any kind of JPEG file format (JPEG 2000,
-  JPEG, JPEG XR, JPEG XS, JPEG XT). Call this script with a JPEG file
-  as argument to parse it and its codestream. This is a generic jpx
-  container parser that is also aware of JPEG XR with ISO boxes and
-  the JPEG XS file format. Additionally supported flags:
+The script jxscodestream.py outputs the parsed content to stdout; you can redirect the output to a file:
 
-    -C, --ignore-codestream: Don't parse the Codestream boxes.
+>>> py jxscodestream.py 200.jxs > 200.txt
 
-* jp2box.py
-  JPEG 2000 File Format box parsing. This is used by jp2file.py.
+(200.jxs is an examplary jpeg xs file from ISO-21122-Part4-ed3 you can fing in this folder)
 
-* jp2utils.py
-  Some helper functions used by the other scripts.
+Scripts for JPEG flavours other than JPEG XS are converted but not tested.
 
-* jxrfile.py
-  JPEG XR file format and codestream parsing. This is a combined
-  parser for both formats. Uses jp2utils and icc.
-
-* jpgcodestream.py
-  Codestream parsing for ISO/IEC 10918-1 and ISO/IEC 18477-3 (JPEG and
-  JPEG XT).
-
-* jxscodestream.py
-  Codestream parsing for ISO/IEC 21122-1 (JPEG XS)
-
-* jpgxtbox.py
-  Some helper functions for JPEG XT box parsing.
-  
-
-Please contact Thomas Richter <thomas.richter@iis.fraunhofer.de> 
-for comments and suggestions.
+The conversion for Python2 to Python3 for these scripts mostly consists in replacing the Python2 print statement (print args) 
+with the Python3 print method (print(args)) and modifying exception catch. Also, redundand ord's were removed.
