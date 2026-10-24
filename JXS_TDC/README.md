@@ -1,17 +1,28 @@
 # JXS TEMPORAL DIFFERENTIAL CODING
 
-Only 8 items (command line argument -n) of the sequence 308 found in  
-https://standards.iso.org/iso-iec/21122/-4/ed-3/en/tests.zip are decoded:
+First 8 items (command line argument -n) of the sequence 308 taken from   
+https://standards.iso.org/iso-iec/21122/-4/ed-3/en/tests.zip are decoded
+with the command:
 
 > jxs_decoder.exe -f 0 -n 8 308/frame_%08d.jxc 308/frame_%08d.ppm
 
 Files frame_%08d.ppm are converted to frame_%08d.png pictures and, with 
-the origin files frame_%08d.jxc, added to the folder JXS_TDC/308 of this 
+the origin files frame_%08d.jxc, stored to the folder JXS_TDC/308 of this 
 repo.
 
-Alternatively, views of jxc files viewed by the ref codec ed 2 JXS viewer 
-(where TDC markers are ignored) are saved as frame_%08d.jxs.png pictures 
-and added to the folder TDC/308_jxc_ed2viewer.
+For camparison, png-views of jxc files viewed by the ref_codec_ed.2-based 
+JXS viewer (this viewer omits TDC markers) are saved as frame_%08d.jxs.png 
+pictures and stored to the folder TDC/308_jxc_ed2viewer.
+
+Yet another folder, '308+1', stores some of the images decoded with the 
+command
+
+> jxs_decoder.exe -f 1 -n 32 308/frame_%08d.jxc 3081/frame1_%08d.ppm
+
+i.e., starting with the next file after the sequence beginning: command 
+line argument -f set to 1.
+
+---
 
 citing 
 https://journal.smpte.org/periodicals/SMPTE%20Motion%20Imaging%20Journal/134/5/16/ :
