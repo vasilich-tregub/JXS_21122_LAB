@@ -17,8 +17,10 @@ citing
 https://journal.smpte.org/periodicals/SMPTE%20Motion%20Imaging%20Journal/134/5/16/ :
 
 > JPEG XS 3rd Edition: The New Temporal Differential Coding (TDC) Profile
-Tim Bruylants, Ben Runyan, Jean-Baptiste Lorent
-The 3rd edition of JPEG XS introduces the Temporal Differential Coding 
+
+> Tim Bruylants, Ben Runyan, Jean-Baptiste Lorent
+
+> The 3rd edition of JPEG XS introduces the Temporal Differential Coding 
 (TDC) profile, further improving the compression efficiency over the XS 
 High profile. TDC adds a wavelet-domain temporal prediction block using 
 a single compressed frame buffer to reduce correlation between successive 
