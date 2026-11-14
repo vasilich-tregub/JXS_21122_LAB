@@ -1,0 +1,45 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "JXS_SequenceDecoder.exe (JXS_SequenceDecoder\\JXS_SequenceDecoder.exe)",
+      "name": "JXS_SequenceDecoder.exe (JXS_SequenceDecoder\\JXS_SequenceDecoder.exe)"
+    },
+    {
+      "type": "default-with-args",
+      "project": "CMakeLists.txt",
+      "projectTarget": "JXS_SequenceDecoder.exe (JXS_SequenceDecoder\\JXS_SequenceDecoder.exe)",
+      "name": "JXS_SequenceDecoder.exe -f 1 -n 90 sintel/sintel%04d.jxc sintelppm/sintel%04d.ppm",
+      "args": [
+        "-f 1 -n 90 sintel/sintel%04d.jxc sintelppm/sintel%04d.ppm"
+      ]
+    },
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "JXS_SequenceEncoder.exe (JXS_SequenceEncoder\\JXS_SequenceEncoder.exe)",
+      "name": "JXS_SequenceEncoder.exe (JXS_SequenceEncoder\\JXS_SequenceEncoder.exe)"
+    },
+    {
+      "type": "default-with-args",
+      "project": "CMakeLists.txt",
+      "projectTarget": "JXS_SequenceEncoder.exe (JXS_SequenceEncoder\\JXS_SequenceEncoder.exe)",
+      "name": "JXS_SequenceEncoder.exe -c p=tdc -c rate=4 -f 1 -n 90 sintelppm/sintel%04d.ppm sintel/sintel%04d.jxc",
+      "args": [
+        "-c p=tdc -c rate=4 -f 1 -n 90 sintelppm/sintel%04d.ppm sintel/sintel%04d.jxc"
+      ]
+    },
+    {
+      "type": "default-with-args",
+      "project": "CMakeLists.txt",
+      "projectTarget": "JXS_SequenceEncoder.exe (JXS_SequenceEncoder\\JXS_SequenceEncoder.exe)",
+      "name": "JXS_SequenceEncoder.exe -c p=MLS.12 -f 1 -n 90 sintelppm/sintel%04d.ppm sintel/sintel%04d.jxc",
+      "args": [
+        "-c p=MLS.12 -f 1 -n 90 sintelppm/sintel%04d.ppm sintel/sintel%04d.jxc"
+      ]
+    }
+  ]
+}
