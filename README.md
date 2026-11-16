@@ -47,12 +47,14 @@ Lorent gave the example of medical applications where you might need the low
 latency and high quality for applications such as endoscopy, but where static 
 images are shown with a very high level of accuracy.
 
-Intrigued by this intra/inter promise without resource-greedy MPEG4 motion 
-compensation, I set out a few tests of encoding/decoding to/from JXS sequences 
-extracted from SINTEL clip frames (sintelppm.zip with this repo).
+Intrigued by this intra/inter promise to encode the sequence without the 
+resource-greedy MPEG4 motion compensation, I set out a few tests of 
+encoding to/decoding from an JXS sequence extracted from SINTEL video frames 
+(sintelppm.zip with this repo).
 
-To conform to jxs_encoder/jxs_decoder options format, an output sequence is specified 
-in my tests, even when DO_NOT_WRITE_JXS_SEQUENCE_OUTPUT_FILES macro is undefined.
+To conform to the jxs_encoder/jxs_decoder options format, an output sequence 
+should be specified in my tests, even when the 
+DO_NOT_WRITE_JXS_SEQUENCE_OUTPUT_FILES macro is defined.
 
 Encoding to JXS sequence without TDC markers:
 
@@ -80,9 +82,9 @@ corresponding sequences, both with and without TDC markers.
 
 Decoding from JXS sequence without TDC markers:
 
-> /> JXS_SequenceDecoder -f 1 -n 90 sintel-no-tdc/sintel%04d.jxc sintelppm/sintel%04d.ppm
+> \> JXS_SequenceDecoder -f 1 -n 90 sintel-no-tdc/sintel%04d.jxc sintelppm/sintel%04d.ppm
 
-> Image: 720x306 3-comp@8bpp
+> Image: 720x306 3-comp@8bpp <br/>
 Sampling: 1x1/1x1/1x1 <br/>
 17 16 16 16 16 17 16 16 16 17 16 16 16 16 16 16 16 17 16 16 16 16 18 16 16 16 17 16 16 16 16 16 16 
 16 17 16 16 17 16 16 16 16 16 16 16 16 16 16 17 16 16 16 16 16 16 16 16 15 16 16 16 16 16 16 16 16 
@@ -90,15 +92,15 @@ Sampling: 1x1/1x1/1x1 <br/>
 
 Decoding from JXS sequence with TDC markers:
 
-> /> JXS_SequenceDecoder -f 1 -n 90 sintel/sintel%04d.jxc sintelppm/sintel%04d.ppm
+> \> JXS_SequenceDecoder -f 1 -n 90 sintel/sintel%04d.jxc sintelppm/sintel%04d.ppm
 
-> Image: 720x306 3-comp@8bpp
+> Image: 720x306 3-comp@8bpp <br/>
 Sampling: 1x1/1x1/1x1 <br/>
 22 23 23 24 23 23 23 23 23 22 23 22 23 23 23 23 23 23 23 23 23 23 24 23 23 23 20 21 20 21 21 20 20 
 21 21 20 21 21 21 20 21 21 20 21 20 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 
 21 22 21 21 23 23 22 22 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 (milliseconds)
 
-I failed to test encoding with an TDCMLS444.12 profile:
+I failed to test encoding with the TDCMLS444.12 profile:
 
 > \> JXS_SequenceEncoder.exe -c p=tdcmls444.12 -f 1 -n 90 sintelppm/sintel%04d.ppm sintel/sintel%04d.jxc
 
@@ -108,12 +110,12 @@ RATE Error: unable to reach precinct budget=8600 (min_possible=112624) <br/>
 Unable to make the rate allocation on the precinct <br/>
 Unable to encode image sintelppm/sintel0001.ppm
 
-As MLS encoding is lossless, it is not obvious what parameters (an therefore command line options) 
+As MLS encoding is lossless, it is not obvious what parameters (and therefore command line options) 
 might be used to satisfy budget appetite (if the configuration is responsible for this failure).
 
 Still, the sequence can be successfully encoded with MLS.12 profile (no tdc, of course):
 
-> /> JXS_SequenceEncoder.exe -c p=MLS.12 -f 1 -n 90 sintelppm/sintel%04d.ppm sintel-mls/sintel%04d.jxc
+> \> JXS_SequenceEncoder.exe -c p=MLS.12 -f 1 -n 90 sintelppm/sintel%04d.ppm sintel-mls/sintel%04d.jxc
 
 > [image_open] Using ppm lib to parse input file <br/>
 [image_open] Image: 720x306 with bitdepth=8 <br>
@@ -129,12 +131,17 @@ Encoded with MLS.profile, sintel%04d.jxc file size varies through the sequence:
 406K 408K 408K 408K 407K 406K 405K 405K 403K 315K 313K 313K 313K 314K 314K 314K 315K 315K 316K 316K 
 317K 317K 318K 318K 318K 318K 318K 318K 319K 319K
 
-Decoding from JXS sequence encoded with MLS.12 profile (went with a quirk, see to it later):
+The jxs_decoder code of sample decoder with 21122 reference codec computes bitstream_buf_max_size 
+looking into only the first jxc file of the sequence (line 144, programs/xs_dec_main.c). If there 
+is a greater file in the sequence, xs_dec_bitstream, in line 270, fails. In JXS_SequenceDecoder, 
+I compute bitstream_buf_max_size over the entire sequence (lines 71-83).
 
-> /> JXS_SequenceDecoder -f 1 -n 90 sintel-mls/sintel%04d.jxc sintelppm/sintel%04d.ppm
+Decoding from JXS sequence encoded with MLS.12 profile:
+
+> \> JXS_SequenceDecoder -f 1 -n 90 sintel-mls/sintel%04d.jxc sintelppm/sintel%04d.ppm
 
 > Image: 720x306 3-comp@8bpp <br/>
 Sampling: 1x1/1x1/1x1 <br/>
-39 37 37 37 37 37 37 37 36 36 36 36 37 37 37 39 41 37 41 37 39 36 37 37 36 37 34 33 32 32 31 32 31 
-32 32 32 32 32 32 32 32 31 31 31 32 31 31 31 31 31 31 32 31 31 31 34 32 31 31 32 32 32 32 32 32 32 
-32 32 31 27 27 27 27 27 26 27 27 26 27 27 27 27 27 26 27 28 27 27 27 27 (milliseconds)
+41 36 37 37 43 38 40 40 40 39 38 37 39 36 37 37 36 36 37 36 36 37 39 37 37 38 35 35 35 32 32 40 35 
+35 34 35 35 33 32 32 31 31 31 31 32 32 31 32 32 34 34 34 32 31 31 31 31 31 31 32 33 40 37 37 37 37 
+34 34 33 27 27 26 27 27 28 28 29 29 27 27 27 26 27 28 27 27 28 28 29 28 (milliseconds)

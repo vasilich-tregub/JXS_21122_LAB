@@ -4,7 +4,6 @@
 #include <vector>
 #include <time.h>
 #include "libjxs.h"
-#include "PlanarToPackaged.h"
 extern "C" {
 #include "cmdline_options.h"
 #include "file_io.h"
@@ -69,15 +68,19 @@ int main(int argc, char** argv)
     input_seq_n = argv[optind];
     input_fn = (char*) malloc(strlen(input_seq_n) + MAX_SEQ_NUMBER_DIGITS);
 
-    sequence_get_filepath(input_seq_n, input_fn, file_idx + options.sequence_first);
-    bitstream_buf_max_size = fileio_getsize(input_fn);
-    if (bitstream_buf_max_size <= 0)
+    bitstream_buf_max_size = 0;
+    for (int i = 0; i < options.sequence_n; ++i)
     {
-        fprintf(stderr, "Unable to open file %s\n", input_seq_n);
-        ret = -1;
-        return ret;
+        sequence_get_filepath(input_seq_n, input_fn, file_idx + options.sequence_first + i);
+        bitstream_buf_size = fileio_getsize(input_fn);
+        if (bitstream_buf_size <= 0)
+        {
+            fprintf(stderr, "Unable to open file %s\n", input_seq_n);
+            ret = -1;
+            return ret;
+        }
+        bitstream_buf_max_size = std::max(bitstream_buf_size, bitstream_buf_max_size);
     }
-
     bitstream_buf = (uint8_t*)malloc((bitstream_buf_max_size + 8) & (~0x7));
     if (!bitstream_buf)
     {
@@ -85,6 +88,7 @@ int main(int argc, char** argv)
         ret = -1;
         return ret;
     }
+    sequence_get_filepath(input_seq_n, input_fn, file_idx + options.sequence_first);
     fileio_read(input_fn, bitstream_buf, &bitstream_buf_size, bitstream_buf_max_size);
 
     if (!xs_dec_probe(bitstream_buf, bitstream_buf_size, &xs_config, &image))
