@@ -133,8 +133,8 @@ Encoded with MLS.profile, sintel%04d.jxc file size varies through the sequence:
 
 The jxs_decoder code of sample decoder with 21122 reference codec computes bitstream_buf_max_size 
 looking into only the first jxc file of the sequence (line 144, programs/xs_dec_main.c). If there 
-is a greater file in the sequence, xs_dec_bitstream, in line 270, fails. In JXS_SequenceDecoder, 
-I compute bitstream_buf_max_size over the entire sequence (lines 71-83).
+is a greater file in the sequence, the function fileio_read, in line 306, fails. In 
+JXS_SequenceDecoder, I compute bitstream_buf_max_size over the entire sequence (lines 71-83).
 
 Decoding from JXS sequence encoded with MLS.12 profile:
 
